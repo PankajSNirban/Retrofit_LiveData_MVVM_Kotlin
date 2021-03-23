@@ -1,8 +1,12 @@
-package com.wealthpark.tokyogallery.pankajIn
+package com.wealthpark.tokyogallery.pankajIn.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.wealthpark.tokyogallery.pankajIn.network.TokyoParkAPIClient
+import com.wealthpark.tokyogallery.pankajIn.network.TokyoParkImpl
+import com.wealthpark.tokyogallery.pankajIn.interfaces.WealthAPIService
+import com.wealthpark.tokyogallery.pankajIn.models.TokyoParkModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

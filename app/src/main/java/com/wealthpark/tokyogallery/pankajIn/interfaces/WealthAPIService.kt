@@ -1,5 +1,6 @@
-package com.wealthpark.tokyogallery.pankajIn
+package com.wealthpark.tokyogallery.pankajIn.interfaces
 
+import com.wealthpark.tokyogallery.pankajIn.models.TokyoParkModel
 import retrofit2.Call
 import retrofit2.http.GET
 

@@ -1,18 +1,21 @@
-package com.wealthpark.tokyogallery.pankajIn
+package com.wealthpark.tokyogallery.pankajIn.network
 
+import com.wealthpark.tokyogallery.pankajIn.interfaces.ITokyoParkRepository
+import com.wealthpark.tokyogallery.pankajIn.interfaces.WealthAPIService
+import com.wealthpark.tokyogallery.pankajIn.models.TokyoParkModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import io.reactivex.Observable
 
-class TokyoParkImpl(private val onBoardingServiceService: WealthAPIService) : ITokyoParkRepository {
+class TokyoParkImpl(private val wealthAPIService: WealthAPIService) : ITokyoParkRepository {
 
 
     override fun getCitiesAndFoodData(): Observable<TokyoParkModel> {
 
         return Observable.create {
 
-            val apiCall = onBoardingServiceService.retrieveCityAndFoodList()
+            val apiCall = wealthAPIService.retrieveCityAndFoodList()
 
             apiCall.enqueue(object : Callback<TokyoParkModel> {
 

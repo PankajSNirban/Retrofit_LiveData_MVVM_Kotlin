@@ -1,4 +1,4 @@
-package com.wealthpark.tokyogallery.pankajIn
+package com.wealthpark.tokyogallery.pankajIn.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

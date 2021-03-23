@@ -1,4 +1,4 @@
-package com.wealthpark.tokyogallery.pankajIn
+package com.wealthpark.tokyogallery.pankajIn.activities
 
 import android.app.Dialog
 import android.content.Context
@@ -13,6 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wealthpark.tokyogallery.pankajIn.*
+import com.wealthpark.tokyogallery.pankajIn.adapters.TokyoCityAdapter
+import com.wealthpark.tokyogallery.pankajIn.adapters.TokyoFoodAdapter
+import com.wealthpark.tokyogallery.pankajIn.interfaces.OnItemClickListener
+import com.wealthpark.tokyogallery.pankajIn.models.CityList
+import com.wealthpark.tokyogallery.pankajIn.viewmodel.TokyoParkViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -34,9 +40,7 @@ class TokyoParkActivity : AppCompatActivity(), OnItemClickListener {
 
         registerObserver()
 
-        if (checkInternetConnection(this)) tokyoParkViewModel.getCitiesAndFoodData() else getString(
-            R.string.checkInternetConnection
-        )
+        if (checkInternetConnection(this)) tokyoParkViewModel.getCitiesAndFoodData() else showErrorDialog(getString(R.string.checkInternetConnection))
 
     }
 
@@ -61,6 +65,8 @@ class TokyoParkActivity : AppCompatActivity(), OnItemClickListener {
 
 
         tokyoParkViewModel.tokyoParkGalleryData.observe(this, Observer {
+            tv_header_city.visibility=View.VISIBLE
+            tv_header_food.visibility=View.VISIBLE
             rv_tokyo_city_list.adapter = TokyoCityAdapter(this, it.getCities(),this)
             rv_tokyo_food_list.adapter = TokyoFoodAdapter(this, it.getFoods())
         })
@@ -79,11 +85,18 @@ class TokyoParkActivity : AppCompatActivity(), OnItemClickListener {
         val yesBtn = dialog.findViewById(R.id.btn_ok) as Button
         yesBtn.setOnClickListener {
             dialog.dismiss()
+            finish()
         }
         dialog.show()
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (!checkInternetConnection(this))showErrorDialog(getString(R.string.checkInternetConnection))
+
+    }
 
     private fun checkInternetConnection(ctx: Context): Boolean {
         val conMgr = ctx.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager

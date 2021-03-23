@@ -1,4 +1,4 @@
-package com.wealthpark.tokyogallery.pankajIn
+package com.wealthpark.tokyogallery.pankajIn.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
